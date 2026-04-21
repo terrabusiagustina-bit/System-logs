@@ -1,10 +1,192 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>System Logs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Logs</title>
+
+<style>
+/* RESET */
+body {
+  margin: 0;
+  background: black;
+  color: #00ff9f;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+/* HEADER */
+.header {
+  padding: 15px;
+  border-bottom: 1px solid #00ff9f;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.status {
+  color: red;
+  animation: flicker 1s infinite;
+}
+
+/* TERMINAL */
+.terminal {
+  padding: 20px;
+  height: 40vh;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.log-line {
+  opacity: 0;
+  animation: appear 0.5s forwards;
+}
+
+/* MODULES */
+.modules {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 20px;
+}
+
+.module {
+  border: 1px solid #00ff9f;
+  padding: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.module:hover {
+  background: #00ff9f;
+  color: black;
+}
+
+/* BUTTON */
+.connect {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: 1px solid #00ff9f;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.connect:hover {
+  background: #00ff9f;
+  color: black;
+}
+
+/* GLITCH */
+.glitch {
+  position: relative;
+  color: #00ff9f;
+  font-size: 24px;
+}
+
+.glitch::before,
+.glitch::after {
+  content: "SYSTEM LOGS";
+  position: absolute;
+  left: 0;
+}
+
+.glitch::before {
+  color: red;
+  animation: glitch 1s infinite;
+}
+
+.glitch::after {
+  color: blue;
+  animation: glitch 1s infinite reverse;
+}
+
+/* ANIMATIONS */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes appear {
+  to { opacity: 1; }
+}
+</style>
 </head>
-<body style="background:black; color:lime; font-family:monospace;">
-  <h1>SYSTEM LOGS</h1>
-  <p>Initializing system...</p>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="glitch">SYSTEM LOGS</div>
+  <div class="status">STATUS: UNSTABLE</div>
+</div>
+
+<!-- TERMINAL -->
+<div class="terminal" id="terminal"></div>
+
+<!-- MODULES -->
+<div class="modules">
+  <div class="module" onclick="go('archivos/anomalia.html')">ARCHIVOS_CLASIFICADOS.exe</div>
+  <div class="module" onclick="go('archivos/memoria.html')">REGISTROS_MEMORIA.sys</div>
+  <div class="module" onclick="go('archivos/cuarentena.html')">CUARENTENA.log</div>
+  <div class="module" onclick="go('archivos/logs.html')">CRITICAL_ERRORS.alert</div>
+  <div class="module" onclick="go('archivos/terminal.html')">TERMINAL_COMMS</div>
+  <div class="module" onclick="secret()">???</div>
+</div>
+
+<!-- BOTÓN -->
+<div class="connect" onclick="window.open('https://instagram.com', '_blank')">
+  ESTABLECER_CONEXION
+</div>
+
+<script>
+// LOGS EN VIVO
+const logs = [
+  "> Booting system...",
+  "> Loading memory...",
+  "> Checking integrity...",
+  "> ERROR: anomaly detected",
+  "> Attempting recovery...",
+  "> Connection lost...",
+  "> Re-routing...",
+  "> Unknown signal detected...",
+];
+
+const terminal = document.getElementById("terminal");
+
+let i = 0;
+function addLog() {
+  if (i < logs.length) {
+    const line = document.createElement("div");
+    line.className = "log-line";
+    line.textContent = logs[i];
+    terminal.appendChild(line);
+    i++;
+    setTimeout(addLog, 800);
+  }
+}
+
+addLog();
+
+// NAVEGACIÓN
+function go(page) {
+  window.location.href = page;
+}
+
+// SECRETO
+function secret() {
+  alert("ACCESS DENIED");
+}
+</script>
+
 </body>
 </html>
