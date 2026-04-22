@@ -1,25 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<title>QUARANTINE</title>
+<meta charset="UTF-8">
+<title>QUARANTINE DIRECTORY</title>
+
 <style>
-body{background:black;color:#00ff9f;font-family:monospace;padding:20px;}
+body {
+  background: black;
+  color: #00ff9f;
+  font-family: monospace;
+  padding: 20px;
+}
+
+/* TITULO GLITCH */
+.glitch {
+  position: relative;
+  font-size: 28px;
+}
+
+.glitch::before,
+.glitch::after {
+  content: "QUARANTINE DIRECTORY";
+  position: absolute;
+  left: 0;
+}
+
+.glitch::before {
+  color: red;
+  animation: glitch 1s infinite;
+}
+
+.glitch::after {
+  color: blue;
+  animation: glitch 1s infinite reverse;
+}
+
+/* TARJETAS */
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  border: 1px solid #00ff9f;
+  padding: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: #00ff9f;
+  color: black;
+}
+
+/* INFO OCULTA */
+.hidden {
+  opacity: 0;
+  transition: 0.3s;
+  font-size: 12px;
+}
+
+.card:hover .hidden {
+  opacity: 1;
+}
+
+/* BOTONES */
+button {
+  margin-top: 20px;
+  background: none;
+  border: 1px solid #00ff9f;
+  color: #00ff9f;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00ff9f;
+  color: black;
+}
+
+/* ANIMACIONES */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
 </style>
 </head>
+
 <body>
 
-<h2>QUARANTINE DIRECTORY</h2>
+<h1 class="glitch">QUARANTINE DIRECTORY</h1>
 
-<p>ID: NPC_023</p>
-<p>STATUS: CORRUPTED</p>
-<p>BEHAVIOR: ERRATIC</p>
+<div class="container">
 
-<p>ID: NPC_045</p>
-<p>STATUS: UNSTABLE</p>
+  <div class="card">
+    <p>ID: NPC_023</p>
+    <p>STATUS: CORRUPTED</p>
+    <p>BEHAVIOR: ERRATIC</p>
+
+    <div class="hidden">
+      <p>> Memory fragments detected</p>
+      <p>> Repeating loop behavior</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p>ID: NPC_045</p>
+    <p>STATUS: UNSTABLE</p>
+    <p>BEHAVIOR: PASSIVE</p>
+
+    <div class="hidden">
+      <p>> Responds to unknown signals</p>
+      <p>> Possible external interference</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p>ID: NPC_078</p>
+    <p>STATUS: CRITICAL</p>
+    <p>BEHAVIOR: AGGRESSIVE</p>
+
+    <div class="hidden">
+      <p>> Attempted escape</p>
+      <p>> Containment failed</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p>ID: NPC_101</p>
+    <p>STATUS: UNKNOWN</p>
+    <p>BEHAVIOR: ???</p>
+
+    <div class="hidden">
+      <p>> Data corrupted</p>
+      <p>> Origin not found</p>
+    </div>
+  </div>
+
+</div>
 
 <br>
 
-<button onclick="window.location.href='../index.html'">BACK</button>
+<button onclick="window.location.href='index.html'">BACK</button>
 <button onclick="window.open('#')">VER_CAMARAS</button>
 
 </body>
