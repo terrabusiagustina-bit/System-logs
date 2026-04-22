@@ -182,11 +182,44 @@ function go(page) {
   window.location.href = page;
 }
 
-// SECRETO
+<script>
+// LOGS EN VIVO
+const logs = [
+  "> Booting system...",
+  "> Loading memory...",
+  "> Checking integrity...",
+  "> ERROR: anomaly detected",
+  "> Attempting recovery...",
+  "> Connection lost...",
+  "> Re-routing...",
+  "> Unknown signal detected...",
+  "> Unauthorized access attempt...",
+  "> Source: TERMINAL_ZERO"
+];
+
+const terminal = document.getElementById("terminal");
+
+let i = 0;
+function addLog() {
+  if (i < logs.length) {
+    const line = document.createElement("div");
+    line.className = "log-line";
+    line.textContent = logs[i];
+    terminal.appendChild(line);
+    i++;
+    setTimeout(addLog, 700);
+  }
+}
+
+addLog();
+
+// NAVEGACIÓN
+function go(page) {
+  window.location.href = page;
+}
+
+// SECRETO → ahora sí lleva a F
 function secret() {
-  alert("ACCESS DENIED");
+  window.location.href = "archivos/terminal-zero.html";
 }
 </script>
-
-</body>
-</html>
