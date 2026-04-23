@@ -1,24 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<title>CRITICAL LOGS</title>
+<meta charset="UTF-8">
+<title>CRITICAL ERROR</title>
+
 <style>
-body{background:black;color:red;font-family:monospace;padding:20px;}
+body{background:black;color:red;font-family:monospace;padding:30px;}
+#count{font-size:30px;}
+button{margin-top:20px;border:1px solid red;background:none;color:red;padding:10px;cursor:pointer;}
+button:hover{background:red;color:black;}
 </style>
 </head>
+
 <body>
 
-<h2>CRITICAL FAILURE</h2>
+<h1>CRITICAL SYSTEM FAILURE</h1>
 
-<p>SYSTEM WIPE INITIATED</p>
-<p>TIME REMAINING: UNKNOWN</p>
+<p>> ERROR: SERVER COLLAPSE IMMINENT</p>
 
-<p>> Some processes attempted escape...</p>
+<p id="count">10</p>
 
 <br>
 
-<button onclick="window.location.href='../index.html'">BACK</button>
-<button onclick="window.open('#')">DESCARGAR_MANIFIESTO</button>
+<p>> Algunos procesos intentaron escapar...</p>
+<p>> Estado: DESCONOCIDO</p>
+
+<br>
+
+<button onclick="window.location.href='./index.html'">BACK</button>
+
+<button onclick="window.open('#')">
+DESCARGAR_MANIFIESTO
+</button>
+
+<script>
+let t = 10;
+setInterval(()=>{
+  t--;
+  document.getElementById("count").textContent = t;
+  if(t<=0){
+    document.body.innerHTML="<h1>SYSTEM PURGED</h1>";
+  }
+},1000);
+</script>
 
 </body>
 </html>
