@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>DOWNLOAD GAME</title> 
+<title>DOWNLOAD GAME</title>
 
 <style>
 body {
@@ -53,7 +53,9 @@ button:hover {
 
 <p id="status">0%</p>
 
-<button onclick="window.location.href='./index.html'">CANCELAR</button>
+<button onclick="window.location.href='https://terrabusiagustina-bit.github.io/System-logs/index.html'">
+CANCELAR
+</button>
 
 <script>
 let progress = 0;
@@ -62,7 +64,7 @@ let status = document.getElementById("status");
 
 let interval = setInterval(() => {
   progress += Math.random() * 10;
-  
+
   if (progress >= 100) {
     progress = 100;
     clearInterval(interval);
