@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>DOWNLOAD GAME</title>
+
+<style>
+body {
+  background: black;
+  color: #00ff9f;
+  font-family: monospace;
+  padding: 30px;
+  text-align: center;
+}
+
+#bar {
+  width: 0%;
+  height: 20px;
+  background: #00ff9f;
+  margin-top: 20px;
+}
+
+.container {
+  width: 100%;
+  border: 1px solid #00ff9f;
+}
+
+button {
+  margin-top: 20px;
+  border: 1px solid #00ff9f;
+  background: none;
+  color: #00ff9f;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00ff9f;
+  color: black;
+}
+</style>
+</head>
+
+<body>
+
+<h1>DESCARGANDO: ECHOES OF THE SYSTEM</h1>
+
+<p>> Inicializando descarga...</p>
+
+<div class="container">
+  <div id="bar"></div>
+</div>
+
+<p id="status">0%</p>
+
+<button onclick="window.location.href='./index.html'">CANCELAR</button>
+
+<script>
+let progress = 0;
+let bar = document.getElementById("bar");
+let status = document.getElementById("status");
+
+let interval = setInterval(() => {
+  progress += Math.random() * 10;
+  
+  if (progress >= 100) {
+    progress = 100;
+    clearInterval(interval);
+    status.textContent = "DESCARGA COMPLETA";
+    document.body.innerHTML += "<p>> Instalación lista. Ejecutar simulación.</p>";
+  }
+
+  bar.style.width = progress + "%";
+  status.textContent = Math.floor(progress) + "%";
+
+}, 400);
+</script>
+
+</body>
+</html>
