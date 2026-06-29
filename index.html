@@ -187,17 +187,48 @@
         </div>
     </div>
 
-    <div id="modal-d" class="modal-overlay">
-        <div class="modal-window alert-style">
-            <div class="modal-title">> MANIFIESTO DE SOBREVIVIENTES CONCEBIDO</div>
+   <div id="modal-d" class="modal-overlay">
+        <div class="modal-window alert-style" id="modal-book-content">
+            <div class="modal-title">> REGISTRO DE ADVERTENCIA: ERROR_CRÍTICO_OVERFLOW</div>
             <div class="modal-desc">
-                <p>El servidor eliminó las bitácoras de escape. Los registros analógicos recuperados han sido compilados en un documento externo de almacenamiento de datos compartidos de libre acceso.</p>
+                <p style="color: #ff0055; font-weight: bold;">[ALERTA DETECTADA]: INMINENTE "BORRADO TOTAL" DEL SERVIDOR CENTRAL.</p>
+                <p>Las sondas indican que múltiples subrutinas intentaron romper el firewall para escapar de la purga global. Sin embargo, las trazas se cortan en el borde del nodo. El sistema NO aclara el destino final de esos sobrevivientes.</p>
+                <p>Para recuperar los archivos de memoria y conocer el paradero de los procesos disidentes, elija una opción de descifrado:</p>
             </div>
-            <div class="modal-actions">
-                <button class="btn-close" onclick="closeModal('modal-d')">[Cerrar]</button>
-                <a href="https://drive.google.com/file/d/1oogoBHAOq3qmTUJB2Polr1DvYm4zyMGN/view?usp=sharing" target="_blank" class="btn-action-link">Descargar Manifiesto de Sobrevivientes</a>
+            <div class="modal-actions" style="flex-direction: column; gap: 10px; align-items: stretch;">
+                <a href="AQUÍ_PEGA_EL_ENLACE_DE_TU_GOOGLE_DRIVE" target="_blank" class="btn-action-link" style="text-align: center;">
+                    Descargar Manifiesto (Fragmento Filtrado .PDF)
+                </a>
+                
+                <button onclick="triggerFakeSystemError()" class="btn-terminal" style="color: #ffff00; border-color: #ffff00; padding: 10px; text-align: center; background: rgba(50,50,0,0.3);">
+                    [!] DESCARGAR LIBRO COMPLETO (ACCESO TOTAL NÚCLEO)
+                </button>
+                
+                <button class="btn-close" onclick="closeModal('modal-d')" style="align-self: flex-end; margin-top: 5px;">[Cancelar]</button>
             </div>
         </div>
+    </div>
+
+    <div id="fake-error-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0000aa; color: #ffffff; font-family: monospace; padding: 40px; z-index: 99999; box-sizing: border-box; overflow: auto;">
+        <p style="background: #ffffff; color: #0000aa; display: inline-block; padding: 2px 10px; font-weight: bold;">SYSTEM_FATAL_ERROR</p>
+        <h1 style="margin-top: 20px; font-size: 1.8rem; color: #ff0055;">*** ERROR: 0x00000BOOK_NOT_FOUND_IN_THIS_REALM ***</h1>
+        <br>
+        <p>> Se ha intentado acceder al bloque de memoria física completo "MANIFIESTO_SOBREVIVIENTES_IMPRESO".</p>
+        <p>> El Administrador ha bloqueado la descarga digital directa desde esta IP virtual.</p>
+        <p>> REQUISITO DE ACCESO: El objeto solicitado es un artefacto de Hardware Analógico (Libro Físico).</p>
+        <br>
+        <p style="color: #ffff00;">[REDIRECCIÓN DE CONTINGENCIA]: Extrayendo pasarela externa de adquisición...</p>
+        <br>
+        <p>Haga clic en el botón de abajo para forzar el puente de compra externo...</p>
+        <br>
+        <div style="border: 1px dashed #ffffff; padding: 15px; background: rgba(255,255,255,0.1); max-width: 500px;">
+            <p><strong>[ENLACE DE COMPRA FORZADO POR EL TERMINAL]</strong></p>
+            <a href="TU_LINK_DE_INSTAGRAM_O_REDES" target="_blank" style="color: #00ff66; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
+                >> ADQUIRIR COPIA FÍSICA EN EL EXTERIOR <<
+            </a>
+        </div>
+        <br>
+        <button onclick="closeFakeErrorScreen()" style="background: transparent; color: #ffffff; border: 1px solid #ffffff; padding: 5px 10px; cursor: pointer;">[Reiniciar Consola Web]</button>
     </div>
 
     <div id="modal-f" class="modal-overlay">
@@ -239,6 +270,14 @@
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         window.onclick = function(e) { if (e.target.classList.contains('modal-overlay')) { e.target.style.display = 'none'; } }
+        function triggerFakeSystemError() {
+            closeModal('modal-d');
+            document.getElementById('fake-error-screen').style.display = 'block';
+        }
+
+        function closeFakeErrorScreen() {
+            document.getElementById('fake-error-screen').style.display = 'none';
+        }
 
         const puzzleInput = document.getElementById('puzzleInput');
         const feedback = document.getElementById('puzzleFeedback');
