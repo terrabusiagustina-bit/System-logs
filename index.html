@@ -9,7 +9,7 @@
         :root {
             --color-primary: #00ff66; /* Verde Fósforo */
             --color-dim: #003311;
-            --color-alert: #ff0055; /* Rosa Neón / Alerta */
+            --color-alert: #ff0055; /* Rosa Neón / Alerta / Corrupción */
             --bg-color: #050a05;
             --font-terminal: 'Courier New', Courier, monospace;
         }
@@ -68,7 +68,7 @@
             margin-top: 5px;
         }
 
-        /* Grid de Contenedores / Logs */
+        /* Grid de Contenedores / Logs Principal */
         .terminal-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -121,38 +121,131 @@
             margin-bottom: 15px;
         }
 
-        /* Botones y Links Migratorios */
-        .btn-link {
+        /* Botones de Interfaz */
+        .btn-terminal {
             display: inline-block;
             background: transparent;
             color: var(--color-primary);
             border: 1px solid var(--color-primary);
-            padding: 5px 10px;
-            text-decoration: none;
+            padding: 6px 12px;
+            font-family: var(--font-terminal);
             font-size: 0.85rem;
             font-weight: bold;
             text-transform: uppercase;
             transition: all 0.2s ease;
         }
 
-        .btn-link:hover {
+        .btn-terminal:hover {
             background: var(--color-primary);
             color: var(--bg-color);
             box-shadow: 0 0 10px var(--color-primary);
         }
 
-        .log-card.corrupted .btn-link {
+        .log-card.corrupted .btn-terminal {
             color: var(--color-alert);
             border-color: var(--color-alert);
         }
 
-        .log-card.corrupted .btn-link:hover {
+        .log-card.corrupted .btn-terminal:hover {
             background: var(--color-alert);
             color: white;
             box-shadow: 0 0 10px var(--color-alert);
         }
 
-        /* Sección de Enigma / Desafío */
+        /* --- SUB-VENTANAS FLOTANTES (POP-UPS DE REDIRECCIÓN) --- */
+        .modal-overlay {
+            display: none; /* Ocultas por defecto */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 10, 5, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-window {
+            background: #020502;
+            border: 2px solid var(--color-primary);
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.2);
+            position: relative;
+        }
+
+        .modal-window.alert-style {
+            border-color: var(--color-alert);
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.2);
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px var(--color-primary);
+        }
+
+        .modal-window.alert-style .modal-title {
+            color: var(--color-alert);
+            border-bottom-color: var(--color-alert);
+            text-shadow: 0 0 5px var(--color-alert);
+        }
+
+        .modal-desc {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #a3ffa3;
+        }
+
+        .modal-window.alert-style .modal-desc {
+            color: #ffb3cc;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed var(--color-dim);
+            padding-top: 15px;
+        }
+
+        .btn-action-link {
+            text-decoration: none;
+            background: var(--color-primary);
+            color: var(--bg-color);
+            padding: 8px 16px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0,255,102,0.4);
+        }
+
+        .btn-action-link:hover {
+            background: #ffffff;
+            box-shadow: 0 0 15px #ffffff;
+        }
+
+        .modal-window.alert-style .btn-action-link {
+            background: var(--color-alert);
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.4);
+        }
+
+        .btn-close {
+            background: transparent;
+            color: #888;
+            border: none;
+            font-family: var(--font-terminal);
+            font-size: 0.85rem;
+            text-decoration: underline;
+        }
+
+        .btn-close:hover { color: white; }
+
+        /* Sección de Enigma */
         .puzzle-section {
             border: 2px dashed var(--color-alert);
             padding: 20px;
@@ -174,25 +267,21 @@
             margin-top: 10px;
         }
 
-        .puzzle-feedback {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            min-height: 20px;
-        }
+        .puzzle-feedback { margin-top: 10px; font-size: 0.9rem; min-height: 20px; }
 
-        /* Botón Flotante Persistente (Redes Sociales - Pista E) */
+        /* Botón Flotante Persistente */
         .btn-persistent {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 20px; right: 20px;
             background: var(--bg-color);
             border: 2px solid var(--color-primary);
             color: var(--color-primary);
             padding: 10px 15px;
-            text-decoration: none;
+            font-family: var(--font-terminal);
+            font-size: 0.85rem;
             font-weight: bold;
             box-shadow: 0 0 10px rgba(0,255,102,0.5);
-            z-index: 1000;
+            z-index: 900;
             animation: glitch-border 4s infinite;
         }
 
@@ -202,12 +291,8 @@
         }
 
         footer {
-            margin-top: 50px;
-            border-top: 1px solid var(--color-dim);
-            padding-top: 10px;
-            font-size: 0.75rem;
-            text-align: center;
-            opacity: 0.5;
+            margin-top: 50px; border-top: 1px solid var(--color-dim);
+            padding-top: 10px; font-size: 0.75rem; text-align: center; opacity: 0.5;
         }
     </style>
 </head>
@@ -217,133 +302,193 @@
         <h1 class="glitch-text">SYS_LOGS // ECHOES OF THE SYSTEM</h1>
         <div class="status-bar">
             <span>STATUS: SIMULATION_CRITICAL_FAILURE</span>
-            <span id="system-time">LOC: 0x000F3A</span>
+            <span id="system-time">SYS_TIME: --:--:--</span>
         </div>
     </header>
 
     <div style="margin-bottom: 25px; font-size: 0.85rem; opacity: 0.8;">
         <p>> ADVERTENCIA: Directorio fragmentado. Archivos en estado de corrupción latente.</p>
-        <p>> Reconstruya la secuencia original bajo su propio riesgo.</p>
+        <p>> Haga clic en los comandos de diagnóstico para forzar la restauración de datos.</p>
     </div>
 
     <main class="terminal-grid">
 
         <article class="log-card">
-            <div class="log-header">
-                <span>LOG_ID: ANOMALY_001</span>
-                <span>REF: SOURCE_CODE</span>
-            </div>
+            <div class="log-header"><span>LOG_ID: ANOMALY_001</span><span>VENTANA_01</span></div>
             <h3>[X] Anomalía de Código Origen</h3>
-            <div class="log-body">
-                <p>...DATOS CLASIFICADOS... Se detecta una fluctuación no registrada en el núcleo de la simulación. El timestamp coincide exactamente con la primera alteración del código base. Las variables lógicas colapsaron en un bucle recursivo impredecible. El entorno afectado no responde a los comandos de purga estándar...</p>
-            </div>
-            <a href="https://LINK_DE_TU_JUEGO.com" target="_blank" class="btn-link">> Iniciar simulación</a>
+            <p class="log-body">Un archivo clasificado detalla el momento exacto en que la primera anomalía alteró el código de la simulación. No cuenta cómo es el entorno afectado ni qué hace esta anomalía...</p>
+            <button class="btn-terminal" onclick="openModal('modal-a')">> Ejecutar comando</button>
         </article>
 
         <article class="log-card">
-            <div class="log-header">
-                <span>LOG_ID: MEM_ARCHIVE_GOLDEN</span>
-                <span>REF: THE_LOOP</span>
-            </div>
-            <h3>[X] Registro de Memoria: Era Dorada</h3>
-            <div class="log-body">
-                <p>Sincronización del bucle completada al 100%. Eficiencia estructural óptima. El subsistema procesa ciclos infinitos sin pérdidas de datos ni acumulación de residuos de memoria. Protocolos de mantenimiento automatizados estables. [ERROR: REGISTROS VISUALES REMOVIDOS DE LA BASE CENTRAL].</p>
-            </div>
-            <a href="https://LINK_DE_LA_PELICULA.com" target="_blank" class="btn-link">> Restaurar archivo visual</a>
+            <div class="log-header"><span>LOG_ID: MEM_ARCHIVE_GOLDEN</span><span>VENTANA_04</span></div>
+            <h3>[X] Registro: La Edad Dorada</h3>
+            <p class="log-body">Un registro de memoria antiguo recopila datos sobre la "Edad Dorada" del sistema y cómo funcionaba el bucle de forma perfecta. Se presenta como texto técnico y no muestra quiénes lo habitaban ni cómo se veía...</p>
+            <button class="btn-terminal" onclick="openModal('modal-b')">> Ejecutar comando</button>
         </article>
 
         <article class="log-card corrupted">
-            <div class="log-header">
-                <span>LOG_ID: QUARANTINE_DIR_404</span>
-                <span>REF: ERRATIC_BEHAVIOR</span>
-            </div>
-            <h3>[!] Directorio de Cuarentena: Habitantes</h3>
-            <div class="log-body">
-                <p>Aislamiento preventivo aplicado a múltiples IDs del sistema. Los sujetos muestran patrones de conducta fuera de la curva algorítmica preestablecida. Repetición obsesiva de micro-rutinas y trazas de consciencia de bucle. Archivos biográficos dañados irreparablemente.</p>
-            </div>
-            <a href="https://LINK_DE_LA_SERIE.com" target="_blank" class="btn-link">> Acceder a cámaras de seguridad</a>
+            <div class="log-header"><span>LOG_ID: QUARANTINE_DIR_404</span><span>VENTANA_05</span></div>
+            <h3>[!] Directorio de Cuarentena</h3>
+            <p class="log-body">Un directorio de cuarentena expone perfiles fragmentados de varios habitantes del sistema que presentan comportamientos erráticos. No explica sus historias personales ni qué hacen en su día a día...</p>
+            <button class="btn-terminal" onclick="openModal('modal-c')">> Ejecutar comando</button>
         </article>
 
         <article class="log-card corrupted">
-            <div class="log-header">
-                <span>LOG_ID: CRIT_ERR_OVERFLOW</span>
-                <span>REF: SERVER_PURGE</span>
-            </div>
-            <h3>[!] ALERTA: Borrado Total Inminente</h3>
-            <div class="log-body">
-                <p>ATENCIÓN: Comando global de purga forzada iniciado por el Administrador. Sobrecarga térmica inminente en los sectores 7 a 12. Se detectaron hilos de ejecución huérfanos intentando transferirse fuera del servidor local antes del bloqueo de puertos. Destino: DESCONOCIDO.</p>
-            </div>
-            <a href="https://LINK_DE_COMPRA_LIBRO.com" target="_blank" class="btn-link">> Descargar Manifiesto de Sobrevivientes</a>
+            <div class="log-header"><span>LOG_ID: CRIT_ERR_OVERFLOW</span><span>VENTANA_03</span></div>
+            <h3>[!] Advertencia de Error Crítico</h3>
+            <p class="log-body">Un log de error crítico advierte sobre un "Borrado Total" inminente del servidor. Menciona que algunos procesos intentaron escapar de la purga, pero no aclara el destino de esos sobrevivientes...</p>
+            <button class="btn-terminal" onclick="openModal('modal-d')">> Ejecutar comando</button>
         </article>
 
         <article class="log-card">
-            <div class="log-header">
-                <span>LOG_ID: ANOM_N0D3_FRG-01</span>
-                <span>REF: UNPROCESSED_DATA</span>
-            </div>
-            <h3>[X] Archivo No Procesable</h3>
-            <div class="log-body">
-                <p>El renderizador del sistema informa error crítico de lectura. El archivo “N0D3_FRG-01” contiene capas gráficas vectorizadas y secuencias cronológicas estáticas superpuestas que la GPU del terminal no puede descodificar en tiempo real.</p>
-            </div>
-            <a href="https://LINK_DE_TU_COMIC.com" target="_blank" class="btn-link">> Reconstruct Fragments</a>
+            <div class="log-header"><span>LOG_ID: ANOM_N0D3_FRG-01</span><span>VENTANA_07</span></div>
+            <h3>[X] Registro Anómalo "N0D3_FRG-01"</h3>
+            <p class="log-body">Un registro anómalo detecta el archivo corrupto “N0D3_FRG-01”, compuesto por datos visuales que el sistema no puede procesar. Su contenido permanece inaccesible dentro de la web...</p>
+            <button class="btn-terminal" onclick="openModal('modal-f')">> Ejecutar comando</button>
         </article>
 
         <article class="log-card corrupted">
-            <div class="log-header">
-                <span>LOG_ID: HIDDEN_AUDIO_RAW</span>
-                <span>REF: UNKNOWN_SEQ</span>
-            </div>
-            <h3>[!] Audio Corrupto: Secuencia Estática</h3>
-            <div class="log-body">
-                <p>Audio recuperado de los sectores dañados del disco. Ruido de fondo integrado con modulación de frecuencia modulada. La IA del terminal traduce la señal a la siguiente cadena matemática cíclica: <br><strong>1010011 0101101 0101001 00111101?</strong></p>
-            </div>
-            <span style="font-size: 0.8rem; color: var(--color-dim);">[Sin clave de desencriptación en base de datos]</span>
+            <div class="log-header"><span>LOG_ID: HIDDEN_AUDIO_RAW</span><span>NÚCLEO</span></div>
+            <h3>[!] Audio Corrupto Oculto</h3>
+            <p class="log-body">Fallo del buffer. Emisión numérica en bucle: <br><strong>1010011 0101101 0101001 00111101?</strong><br><span style="color:var(--color-dim)">[No hay claves de desencriptación registradas en esta IP]</span></p>
         </article>
 
     </main>
 
     <section class="puzzle-section">
-        <h2>[//] RECONSTRUCCIÓN DE ARCHIVOS INTEGRAL</h2>
-        <p style="font-size: 0.9rem; margin-top: 5px;">Introduce el código de acceso filtrado en las redes del Sistema para desbloquear el nodo oculto:</p>
-        
-        <input type="text" id="puzzleInput" class="puzzle-input" placeholder="INGRESE CÓDIGO_">
+        <h2>[//] ACCESO A TERMINAL ENCRIPTADA</h2>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Introduce códigos filtrados en las redes sociales para parchear sectores dañados:</p>
+        <input type="text" id="puzzleInput" class="puzzle-input" placeholder="SST_CODE_">
         <div id="puzzleFeedback" class="puzzle-feedback"></div>
     </section>
 
-    <a href="https://LINK_DE_TUS_REDES_SOCIALES.com" target="_blank" class="btn-persistent">
+    <button class="btn-persistent" onclick="openModal('modal-e')">
         [+] ESTABLECER CONEXIÓN EXTERIOR
-    </a>
+    </button>
+
+
+    <div id="modal-a" class="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-title">> ACCESO REQUERIDO: NÚCLEO DE LA SIMULACIÓN</div>
+            <div class="modal-desc">
+                <p>[HUECO ESTRATÉGICO]: El archivo de la anomalía original está encriptado en el Runtime del cliente principal. Para visualizar el entorno afectado y analizar los estragos del bug en tiempo real, es necesario forzar la inicialización externa del entorno virtual.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeModal('modal-a')">[Cancelar]</button>
+                <a href="https://LINK_DE_TU_VIDEOJUEGO.com" target="_blank" class="btn-action-link">Iniciar simulación</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-b" class="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-title">> RESTAURACIÓN DE FRAME: ERA DORADA</div>
+            <div class="modal-desc">
+                <p>[HUECO ESTRATÉGICO]: Los logs de texto confirman la perfección matemática del antiguo bucle, pero la base de datos visual asociada está bloqueada. Para descubrir los rostros de los habitantes originales y ver el renderizado real de la utopía antes de la falla, sincroniza el reproductor.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeModal('modal-b')">[Cancelar]</button>
+                <a href="https://LINK_DE_LA_PELICULA.com" target="_blank" class="btn-action-link">Restaurar archivo visual</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-c" class="modal-overlay">
+        <div class="modal-window alert-style">
+            <div class="modal-title">> PROTOCOLO CUARENTENA: FEED DE SEGURIDAD</div>
+            <div class="modal-desc">
+                <p>[HUECO ESTRATÉGICO]: Los perfiles de los habitantes aislados muestran graves desviaciones lógicas, pero este terminal técnico no almacena su rutina diaria ni sus motivos. Intercepta las transmisiones de vídeo locales para espiar sus vidas cíclicas en tiempo real.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeModal('modal-c')">[Cancelar]</button>
+                <a href="https://LINK_DE_LA_SERIE.com" target="_blank" class="btn-action-link">Acceder a cámaras de seguridad</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-d" class="modal-overlay">
+        <div class="modal-window alert-style">
+            <div class="modal-title">> EXTRACTOR DE DATOS: PROCESOS PERDIDOS</div>
+            <div class="modal-desc">
+                <p>[HUECO ESTRATÉGICO]: El borrado total destruyó los servidores de seguimiento. Los datos sobre el paradero de los procesos supervivientes que escaparon de la purga no existen en este plano digital. Debes desencriptar los registros físicos rescatados del hardware analógico.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeModal('modal-d')">[Cancelar]</button>
+                <a href="https://LINK_DE_COMPRA_LIBRO.com" target="_blank" class="btn-action-link">Descargar Manifiesto de Sobrevivientes</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-f" class="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-title">> DECODIFICADOR GRÁFICO: N0D3_FRG-01</div>
+            <div class="modal-desc">
+                <p>[HUECO ESTRATÉGICO]: Este terminal de texto plano carece de los códecs necesarios para procesar las ráfagas visuales estáticas incrustadas en este archivo de error. Para reconstruir las viñetas del nodo de información fragmentada y leer la secuencia, abre el visor externo.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeModal('modal-f')">[Cancelar]</button>
+                <a href="https://LINK_DE_TU_COMIC.com" target="_blank" class="btn-action-link">Reconstruct Fragments</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-e" class="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-title">> PUENTE DE RED: CONEXIÓN EXTERIOR</div>
+            <div class="modal-desc">
+                <p>[HUECO ESTRATÉGICO]: Los paquetes de datos de la simulación están siendo redirigidos activamente hacia puertos externos para contactar con los "Creadores" (Usuarios). La pasarela web local está saturada, por lo que la señal se propaga a través de frecuencias del espectro social público.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeModal('modal-e')">[Cerrar Enlace]</button>
+                <a href="https://LINK_DE_TUS_REDES_SOCIALES.com" target="_blank" class="btn-action-link">Establecer conexión con el exterior</a>
+            </div>
+        </div>
+    </div>
+
 
     <footer>
-        <p>SYSTEM LOGS v1.0.4 - PROYECTO TRANSMEDIA "ECHOES OF THE SYSTEM" // NINGÚN DERECHO RESERVADO EN LA RED DE LOS CREADORES.</p>
+        <p>SYSTEM LOGS v2.0.0 - PROYECTO TRANSMEDIA "ECHOES OF THE SYSTEM" // TERMINAL DE DIAGNÓSTICO ABIERTA.</p>
     </footer>
 
     <script>
-        // Actualizar reloj simulado en tiempo real
+        // Actualizar reloj de la terminal en vivo
         setInterval(() => {
             const now = new Date();
-            document.getElementById('system-time').innerText = 'SYS_TIME: ' + now.toISOString().slice(11, 19) + ' // LOC_X99';
+            document.getElementById('system-time').innerText = 'SYS_TIME: ' + now.toISOString().slice(11, 19) + ' // LOC_0x00';
         }, 1000);
 
-        // Lógica del Acertijo Interactivo (Marketing)
+        // Funciones para controlar las sub-ventanas
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // Cerrar sub-ventana si hacen clic fuera del cuadro negro
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Lógica interactiva para campañas de Marketing en Redes Sociales
         const puzzleInput = document.getElementById('puzzleInput');
         const feedback = document.getElementById('puzzleFeedback');
-
-        // Aquí puedes definir la palabra clave que darás en tus redes sociales
-        const SOLUCION_CORRECTA = "ECHO_ANOMALY"; 
+        const SOLUCION_CORRECTA = "ECHO_ANOMALY"; // Modifica esta clave cuando quieras lanzar un acertijo real
 
         puzzleInput.addEventListener('input', (e) => {
             const val = e.target.value.toUpperCase().trim();
-            
             if (val === "") {
                 feedback.innerText = "";
-                feedback.style.color = "var(--color-primary)";
             } else if (val === SOLUCION_CORRECTA) {
-                feedback.innerHTML = "<strong>[ACCESO CONCEDIDO]</strong> Archivo extra recuperado: 'El Supervisor mintió. El bucle nunca fue perfecto. Ellos nos observan desde el exterior.'";
+                feedback.innerHTML = "<strong>[ACCESO CONCEDIDO]</strong> Transmisión filtrada: 'El Administrador miente. El bucle fue saboteado desde el exterior.'";
                 feedback.style.color = "var(--color-primary)";
                 puzzleInput.style.borderColor = "var(--color-primary)";
             } else {
-                feedback.innerText = "[ERROR] CÓDIGO INVÁLIDO / ACCESO DENEGADO";
+                feedback.innerText = "[ERROR] CÓDIGO INVÁLIDO O INCOMPLETO";
                 feedback.style.color = "var(--color-alert)";
                 puzzleInput.style.borderColor = "var(--color-alert)";
             }
