@@ -166,13 +166,24 @@
 
     <div id="modal-b" class="modal-overlay">
         <div class="modal-window">
-            <div class="modal-title">> RESTAURACIÓN AUDIOVISUAL: ERA DORADA</div>
+            <div class="modal-title">> EXTRACCIÓN DE SEÑAL // PROYECTO: EDAD_DORADA</div>
             <div class="modal-desc">
-                <p>Los archivos de texto registran un bucle perfecto, pero las imágenes están encriptadas. Se ha redirigido la señal a un nodo externo para reproducir el registro visual remanente (Teaser Concept).</p>
+                <p><strong>[ERROR DE CODEC]</strong>: Los servidores de video de la película cinematográfica han sido purgados por el cortafuegos. El renderizado visual de los habitantes y la utopía original al 100% de resolución es irrecuperable desde esta terminal.</p>
+                <p style="color: #ff0055;">> Sincronizando hardware de contingencia analógico...</p>
+                <p>> Se ha logrado interceptar de forma aislada la <strong>pista de audio remanente</strong> del metraje original. Active los altavoces del Exterior.</p>
             </div>
+            
+            <div style="background: #102010; border: 1px solid var(--color-primary); padding: 15px; margin: 15px 0; border-radius: 4px;">
+                <p style="font-size: 0.8rem; margin-bottom: 8px; color: #ffff00;">[REPRODUCTOR COGNITIVO INTERCEPTADO]:</p>
+                <audio id="audio-edad-dorada" controls style="width: 100%; filter: invert(1) hue-rotate(90deg);">
+                    <source src="soundreality-glitch-effect-3-530928" type="audio/mpeg">
+                    Tu navegador no soporta la decodificación de audio analógico.
+                </audio>
+            </div>
+
             <div class="modal-actions">
-                <button class="btn-close" onclick="closeModal('modal-b')">[Cerrar]</button>
-                <a href="TU_LINK_DE_YOUTUBE_O_REEL" target="_blank" class="btn-action-link">Restaurar archivo visual</a>
+                <button class="btn-close" onclick="closeModalBAndStopAudio()">[Cortar Transmisión]</button>
+                <span style="font-size: 0.8rem; color: #ff0055; font-weight: bold; animation: pulse 1s infinite;">>> EN LÍNEA <<</span>
             </div>
         </div>
     </div>
@@ -280,6 +291,16 @@
 
         function closeFakeErrorScreen() {
             document.getElementById('fake-error-screen').style.display = 'none';
+        }
+        function closeModalBAndStopAudio() {
+            // Cerramos la ventana flotante de la película
+            closeModal('modal-b');
+            // Buscamos el reproductor de audio y lo pausamos automáticamente
+            const audio = document.getElementById('audio-edad-dorada');
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0; // Reinicia el audio al principio
+            }
         }
 
         const puzzleInput = document.getElementById('puzzleInput');
