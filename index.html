@@ -189,14 +189,33 @@
     </div>
 
     <div id="modal-c" class="modal-overlay">
-        <div class="modal-window alert-style">
-            <div class="modal-title">> CÁMARAS DE SEGURIDAD: PROTOCOLO 404</div>
+        <div class="modal-window alert-style" style="max-width: 500px;">
+            <div class="modal-title">> INTERCEPCIÓN BIOMÉTRICA // CÁMARAS SECTOR 05</div>
             <div class="modal-desc">
-                <p>Monitoreo local inaccesible. Para interceptar las transmisiones visuales de las rutinas de los habitantes corruptos en cuarentena, conéctate al feed de vigilancia externo (Animatic/Diseño).</p>
+                <p><strong>[ALERTA DE AISLAMIENTO]</strong>: Monitoreo en streaming interrumpido. El sistema ha recuperado fotogramas estáticos y registros de comportamiento de los sujetos en cuarentena.</p>
             </div>
-            <div class="modal-actions">
-                <button class="btn-close" onclick="closeModal('modal-c')">[Cerrar]</button>
-                <a href="TU_LINK_A_POST_DE_DISEÑO_PERSONAJES" target="_blank" class="btn-action-link">Acceder a cámaras de seguridad</a>
+            
+            <div style="border: 2px solid var(--color-alert); background: #1a0005; padding: 10px; text-align: center; position: relative;">
+                <div style="position: absolute; top: 5px; left: 10px; color: var(--color-alert); font-size: 0.75rem; font-weight: bold; animation: pulse 1s infinite;">
+                    🔴 CAM_05_REC
+                </div>
+                
+                <img id="visor-sujeto-img" src="sujeto1.jpg" alt="Registro Visual Sujeto" style="width: 100%; max-height: 250px; object-fit: cover; border: 1px solid var(--color-alert); margin-top: 15px; margin-bottom: 10px; filter: grayscale(1) contrast(1.2) sepia(1) hue-rotate(300deg);">
+                
+                <div id="visor-sujeto-reporte" style="font-size: 0.85rem; color: #ffb3cc; min-height: 50px; text-align: left; border-top: 1px dashed var(--color-alert); padding-top: 8px;">
+                    <strong>SUJETO:</strong> #01_AN0NYMOUS <br>
+                    <strong>ESTADO:</strong> Rutina alterada. Se repite infinitamente en el sector residencial.
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                <button class="btn-terminal" onclick="cambiarSujeto(-1)" style="color: var(--color-alert); border-color: var(--color-alert); font-size: 0.75rem;">< Anterior</button>
+                <button class="btn-terminal" onclick="cambiarSujeto(1)" style="color: var(--color-alert); border-color: var(--color-alert); font-size: 0.75rem;">Siguiente ></button>
+            </div>
+
+            <div class="modal-actions" style="margin-top: 20px;">
+                <button class="btn-close" onclick="closeModal('modal-c')">[Cerrar Transmisión]</button>
+                <a href="TU_LINK_DE_INSTAGRAM_O_TIKTOK" target="_blank" class="btn-action-link" style="font-size: 0.75rem;">Ver Expediente Completo</a>
             </div>
         </div>
     </div>
@@ -301,6 +320,31 @@
                 audio.pause();
                 audio.currentTime = 0; // Reinicia el audio al principio
             }
+        }
+        // DATOS DE LOS SUJETOS DE LA SERIE ANIMADA (Podés editar los textos a tu gusto!)
+        const listaSujetos = [
+            {
+                img: "sujeto1.jpg",
+                reporte: "<strong>SUJETO:</strong> #01_USER_ERR <br><strong>ESTADO:</strong> Desconexión temporal. Olvidó su función original en el sistema. Vagabundea por nodos caídos."
+            },
+            {
+                img: "sujeto2.jpg",
+                reporte: "<strong>SUJETO:</strong> #02_GLITCH_MIND <br><strong>ESTADO:</strong> Altamente errático. Sus hilos de voz se reproducen al revés. Intentó hackear la terminal central."
+            }
+        ];
+
+        let sujetoActualIndex = 0;
+
+        function cambiarSujeto(direccion) {
+            sujetoActualIndex += direccion;
+            
+            // Bucle para que si pasa el límite vuelva al inicio o al final
+            if (sujetoActualIndex >= listaSujetos.length) { sujetoActualIndex = 0; }
+            if (sujetoActualIndex < 0) { sujetoActualIndex = listaSujetos.length - 1; }
+            
+            // Actualizamos la imagen y el reporte en la pantalla
+            document.getElementById('visor-sujeto-img').src = listaSujetos[sujetoActualIndex].img;
+            document.getElementById('visor-sujeto-reporte').innerHTML = listaSujetos[sujetoActualIndex].reporte;
         }
 
         const puzzleInput = document.getElementById('puzzleInput');
