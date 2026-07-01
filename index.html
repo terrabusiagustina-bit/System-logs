@@ -143,7 +143,7 @@
             </div>
 
             <audio id="audio-fantasma-file" loop>
-                <source src="audio_fantasma.mp3" type="audio/mpeg">
+                <source src="soundreality-morse-140985.mp3" type="audio/mpeg">
             </audio>
         </article>
 
@@ -239,7 +239,7 @@
             <div class="modal-desc">
                 <p style="color: #ff0055; font-weight: bold;">[ALERTA DETECTADA]: INMINENTE "BORRADO TOTAL" DEL SERVIDOR CENTRAL.</p>
                 <p>Las sondas indican que múltiples subrutinas intentaron romper el firewall para escapar de la purga global. Sin embargo, las trazas se cortan en el borde del nodo. El sistema NO aclara el destino final de esos sobrevivientes.</p>
-                <p>Para recuperar los archivos de memoria y conocer el paradero de los procesos disidentes, elija una opción de descifrado:</p>
+                <p>Para recuperar los archivos de memory y conocer el paradero de los procesos disidentes, elija una opción de descifrado:</p>
             </div>
             <div class="modal-actions" style="flex-direction: column; gap: 10px; align-items: stretch;">
                 <a href="https://drive.google.com/file/d/1l6mTLbmoJDLz7sxJ3-wIrXnaSghnLa89/view?usp=sharing" target="_blank" class="btn-action-link" style="text-align: center;">
@@ -362,9 +362,7 @@
 
         // CONTROL DEL AUDIO OCULTO DEL NÚCLEO
         function toggleAudioFantasma() {
-            const audio = document.getElementById('<audio id="audio-fantasma-file" loop>
-    <source src="audio_fantasma.mp3" type="audio/mpeg">
-</audio>');
+            const audio = document.getElementById('audio-fantasma-file');
             const boton = document.getElementById('btn-fantasma');
             const status = document.getElementById('status-fantasma');
 
