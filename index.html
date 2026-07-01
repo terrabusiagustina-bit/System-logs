@@ -131,7 +131,20 @@
         <article class="log-card corrupted">
             <div class="log-header"><span>LOG_ID: HIDDEN_AUDIO_RAW</span><span>NÚCLEO</span></div>
             <h3>[!] Audio Corrupto Oculto</h3>
-            <p class="log-body">Fallo del buffer. Emisión numérica en bucle: <br><strong>1010011 0101101 0101001 00111101?</strong><br><span style="color:var(--color-dim)">[No hay claves de desencriptación registradas en esta IP]</span></p>
+            <p class="log-body">Fallo del buffer del servidor central. Emisión numérica en bucle detectada en las capas profundas de la base de datos: <br>
+            <strong style="color: #ffffff; letter-spacing: 1px;">1010011 0101101 0101001 00111101?</strong><br>
+            <span style="color:var(--color-dim)">[No hay claves de desencriptación registradas en esta IP]</span></p>
+            
+            <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                <button class="btn-terminal" onclick="toggleAudioFantasma()" id="btn-fantasma" style="color: var(--color-alert); border-color: var(--color-alert); font-size: 0.75rem; background: rgba(255,0,85,0.05);">
+                    ▶ INTERCEPTAR EMISIÓN
+                </button>
+                <span id="status-fantasma" style="font-size: 0.75rem; color: var(--color-dim);">[SEÑAL_EN_ESPERA]</span>
+            </div>
+
+            <audio id="audio-fantasma-file" loop>
+                <source src="audio_fantasma.mp3" type="audio/mpeg">
+            </audio>
         </article>
 
     </main>
@@ -153,7 +166,7 @@
             <div class="modal-title">> ACCESO REQUERIDO: RENDERS DE LA SIMULACIÓN</div>
             <div class="modal-desc">
                 <p><strong>[ALERTA NARRATIVA]:</strong> Los registros locales confirman que la anomalía original alteró el entorno gráfico de la simulación, pero este terminal de texto plano no posee los motores de renderizado para proyectar el espacio afectado.</p>
-                <p>Para sortear el bloqueo de datos, el sistema ha establecido un puente de frecuencia hacia un servidor externo de video, interceptando el reporte visual completo del videojuego.</p>
+                <p>Para sortear el bloqueo de datos, el sistema ha establecido un puente de frequency hacia un servidor externo de video, interceptando el reporte visual completo del videojuego.</p>
             </div>
             <div class="modal-actions">
                 <button class="btn-close" onclick="closeModal('modal-a')">[Cancelar Diagnóstico]</button>
@@ -256,7 +269,7 @@
         <br>
         <div style="border: 1px dashed #ffffff; padding: 15px; background: rgba(255,255,255,0.1); max-width: 500px;">
             <p><strong>[ENLACE DE COMPRA FORZADO POR EL TERMINAL]</strong></p>
-            <a href="TU_LINK_DE_INSTAGRAM_O_REDES" target="_blank" style="color: #00ff66; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
+            <a href="https://www.instagram.com/outofthebounds404?igsh=MTd2cHozYWRjbzNhaQ==" target="_blank" style="color: #00ff66; font-weight: bold; text-decoration: underline; font-size: 1.2rem;">
                 >> ADQUIRIR COPIA FÍSICA EN EL EXTERIOR <<
             </a>
         </div>
@@ -310,7 +323,7 @@
             </div>
             <div class="modal-actions">
                 <button class="btn-close" onclick="closeModal('modal-e')">[Cerrar]</button>
-                <a href="TU_LINK_DE_LINKTREE_O_INSTAGRAM_PRINCIPAL" target="_blank" class="btn-action-link">Establecer conexión con el exterior</a>
+                <a href="https://www.instagram.com/outofthebounds404?igsh=MTd2cHozYWRjbzNhaQ==" target="_blank" class="btn-action-link">Establecer conexión con el exterior</a>
             </div>
         </div>
     </div>
@@ -328,6 +341,7 @@
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         window.onclick = function(e) { if (e.target.classList.contains('modal-overlay')) { e.target.style.display = 'none'; } }
+        
         function triggerFakeSystemError() {
             closeModal('modal-d');
             document.getElementById('fake-error-screen').style.display = 'block';
@@ -336,17 +350,40 @@
         function closeFakeErrorScreen() {
             document.getElementById('fake-error-screen').style.display = 'none';
         }
+        
         function closeModalBAndStopAudio() {
-            // Cerramos la ventana flotante de la película
             closeModal('modal-b');
-            // Buscamos el reproductor de audio y lo pausamos automáticamente
             const audio = document.getElementById('audio-edad-dorada');
             if (audio) {
                 audio.pause();
-                audio.currentTime = 0; // Reinicia el audio al principio
+                audio.currentTime = 0;
             }
         }
-        // DATOS DE LOS SUJETOS DE LA SERIE ANIMADA (Podés editar los textos a tu gusto!)
+
+        // CONTROL DEL AUDIO OCULTO DEL NÚCLEO
+        function toggleAudioFantasma() {
+            const audio = document.getElementById('audio-fantasma-file');
+            const boton = document.getElementById('btn-fantasma');
+            const status = document.getElementById('status-fantasma');
+
+            if (audio.paused) {
+                audio.play().catch(err => {
+                    console.log("El navegador requiere interacción previa para reproducir.");
+                });
+                boton.innerText = "■ CONTENER INTERFERENCIA";
+                status.innerText = "[REPRODUCIENDO_BUCLE...]";
+                status.style.color = "var(--color-alert)";
+                status.style.animation = "pulse 1s infinite";
+            } else {
+                audio.pause();
+                boton.innerText = "▶ INTERCEPTAR EMISIÓN";
+                status.innerText = "[SEÑAL_PAUSADA]";
+                status.style.color = "var(--color-dim)";
+                status.style.animation = "none";
+            }
+        }
+
+        // DATOS DE LOS SUJETOS DE LA SERIE ANIMADA
         const listaSujetos = [
             {
                 img: "sujeto1.jpg",
@@ -357,21 +394,29 @@
                 reporte: "<strong>SUJETO:</strong> #02_GLITCH_MIND <br><strong>ESTADO:</strong> Altamente errático. Sus hilos de voz se reproducen al revés. Intentó hackear la terminal central."
             }
         ];
+
+        let sujetoActualIndex = 0;
+
+        function cambiarSujeto(direccion) {
+            sujetoActualIndex += direccion;
+            if (sujetoActualIndex >= listaSujetos.length) { sujetoActualIndex = 0; }
+            if (sujetoActualIndex < 0) { sujetoActualIndex = listaSujetos.length - 1; }
+            
+            document.getElementById('visor-sujeto-img').src = listaSujetos[sujetoActualIndex].img;
+            document.getElementById('visor-sujeto-reporte').innerHTML = listaSujetos[sujetoActualIndex].reporte;
+        }
+
         // LÓGICA DE MINIJUEGO PARA EL CÓMIC (MODAL F)
         let progresoComic = 0;
 
         function inyectarEnergiaComic() {
             if (progresoComic < 100) {
-                // Cada clic suma un 20% a la barra
                 progresoComic += 20; 
-                
                 if (progresoComic > 100) progresoComic = 100;
 
-                // Actualizamos la barra y el texto visual en la pantalla
                 document.getElementById('barra-progreso-comic').style.width = progresoComic + '%';
                 document.getElementById('porcentaje-texto-comic').innerText = 'ESTADO_DE_DECODIFICACIÓN: ' + progresoComic + '%';
 
-                // Si llega al 100%, ocultamos el cargador y mostramos la viñeta del cómic
                 if (progresoComic === 100) {
                     document.getElementById('deck-bloqueado').style.display = 'none';
                     document.getElementById('deck-desbloqueado').style.display = 'block';
@@ -381,7 +426,6 @@
 
         function cerrarModalComic() {
             closeModal('modal-f');
-            // Opcional: Reiniciamos el juego para la próxima vez que entren
             progresoComic = 0;
             document.getElementById('barra-progreso-comic').style.width = '0%';
             document.getElementById('porcentaje-texto-comic').innerText = 'ESTADO_DE_DECODIFICACIÓN: 0%';
@@ -389,20 +433,7 @@
             document.getElementById('deck-desbloqueado').style.display = 'none';
         }
 
-        let sujetoActualIndex = 0;
-
-        function cambiarSujeto(direccion) {
-            sujetoActualIndex += direccion;
-            
-            // Bucle para que si pasa el límite vuelva al inicio o al final
-            if (sujetoActualIndex >= listaSujetos.length) { sujetoActualIndex = 0; }
-            if (sujetoActualIndex < 0) { sujetoActualIndex = listaSujetos.length - 1; }
-            
-            // Actualizamos la imagen y el reporte en la pantalla
-            document.getElementById('visor-sujeto-img').src = listaSujetos[sujetoActualIndex].img;
-            document.getElementById('visor-sujeto-reporte').innerHTML = listaSujetos[sujetoActualIndex].reporte;
-        }
-
+        // CONSOLA DEL ACERTIJO FINAL
         const puzzleInput = document.getElementById('puzzleInput');
         const feedback = document.getElementById('puzzleFeedback');
         const SOLUCION_CORRECTA = "ECHO_ANOMALY"; 
