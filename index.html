@@ -265,14 +265,39 @@
     </div>
 
     <div id="modal-f" class="modal-overlay">
-        <div class="modal-window">
-            <div class="modal-title">> DECODIFICADOR VECTORIAL: N0D3_FRG-01</div>
-            <div class="modal-desc">
-                <p>Este terminal carece de la GPU necesaria para procesar las ráfagas gráficas secuenciales del archivo. Abre el visor externo para reconstruir las viñetas del nodo de información.</p>
+        <div class="modal-window" style="max-width: 500px;">
+            <div class="modal-title">> DECODIFICADOR VECTORIAL // FILE: N0D3_FRG-01</div>
+            
+            <div id="deck-bloqueado" class="modal-desc">
+                <p><strong>[ERROR]</strong>: Este terminal carece de los recursos gráficos activos para procesar el archivo secuencial encriptado. Se requiere inyección manual de ciclos de reloj para forzar la reconstrucción visual.</p>
+                
+                <div style="border: 1px solid var(--color-primary); background: #001100; height: 25px; margin: 15px 0; position: relative; overflow: hidden;">
+                    <div id="barra-progreso-comic" style="width: 0%; height: 100%; background: var(--color-primary); transition: width 0.1s ease;"></div>
+                    <div id="porcentaje-texto-comic" style="position: absolute; width: 100%; text-align: center; top: 3px; font-size: 0.85rem; color: #ffffff; font-weight: bold; mix-blend-mode: difference;">
+                        ESTADO_DE_DECODIFICACIÓN: 0%
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <button class="btn-terminal" onclick="inyectarEnergiaComic()" style="width: 100%; padding: 10px; background: rgba(0,255,102,0.1);">
+                        ⚡ [INYECTAR ENERGÍA AL NÚCLEO]
+                    </button>
+                </div>
             </div>
+
+            <div id="deck-desbloqueado" style="display: none; text-align: center; margin-bottom: 20px;">
+                <p style="color: var(--color-primary); font-weight: bold; margin-bottom: 10px;">> [ARCHIVO RECONSTRUIDO CON ÉXITO] <</p>
+                
+                <img src="comic_fragmento.jpg" alt="Fragmento de Cómic Descifrado" style="width: 100%; max-height: 300px; object-fit: contain; border: 1px solid var(--color-primary); margin-bottom: 10px;">
+                
+                <p style="font-size: 0.85rem; text-align: justify; color: #a3ffa3;">
+                    <strong>REGISTRO VECTORIAL:</strong> Datos recuperados de la Base de Datos Gráfica. El panel expone la primera anomalía materializándose en las líneas de código del Sector de Origen, atrapando la consciencia de las subrutinas.
+                </p>
+            </div>
+
             <div class="modal-actions">
-                <button class="btn-close" onclick="closeModal('modal-f')">[Cerrar]</button>
-                <a href="TU_LINK_AL_CÓMIC_EN_REDES_O_WEBTOON" target="_blank" class="btn-action-link">Reconstruct Fragments</a>
+                <button class="btn-close" onclick="cerrarModalComic()">[Cerrar Decodificador]</button>
+                <a href="https://instagram.com/TU_USUARIO" target="_blank" class="btn-action-link" style="font-size: 0.75rem;">Ver Frecuencia Externa</a>
             </div>
         </div>
     </div>
@@ -332,6 +357,37 @@
                 reporte: "<strong>SUJETO:</strong> #02_GLITCH_MIND <br><strong>ESTADO:</strong> Altamente errático. Sus hilos de voz se reproducen al revés. Intentó hackear la terminal central."
             }
         ];
+        // LÓGICA DE MINIJUEGO PARA EL CÓMIC (MODAL F)
+        let progresoComic = 0;
+
+        function inyectarEnergiaComic() {
+            if (progresoComic < 100) {
+                // Cada clic suma un 20% a la barra
+                progresoComic += 20; 
+                
+                if (progresoComic > 100) progresoComic = 100;
+
+                // Actualizamos la barra y el texto visual en la pantalla
+                document.getElementById('barra-progreso-comic').style.width = progresoComic + '%';
+                document.getElementById('porcentaje-texto-comic').innerText = 'ESTADO_DE_DECODIFICACIÓN: ' + progresoComic + '%';
+
+                // Si llega al 100%, ocultamos el cargador y mostramos la viñeta del cómic
+                if (progresoComic === 100) {
+                    document.getElementById('deck-bloqueado').style.display = 'none';
+                    document.getElementById('deck-desbloqueado').style.display = 'block';
+                }
+            }
+        }
+
+        function cerrarModalComic() {
+            closeModal('modal-f');
+            // Opcional: Reiniciamos el juego para la próxima vez que entren
+            progresoComic = 0;
+            document.getElementById('barra-progreso-comic').style.width = '0%';
+            document.getElementById('porcentaje-texto-comic').innerText = 'ESTADO_DE_DECODIFICACIÓN: 0%';
+            document.getElementById('deck-bloqueado').style.display = 'block';
+            document.getElementById('deck-desbloqueado').style.display = 'none';
+        }
 
         let sujetoActualIndex = 0;
 
