@@ -146,12 +146,14 @@
                 <source src="soundreality-morse-140985.mp3" type="audio/mpeg">
             </audio>
         </article>
-<article class="log-card corrupted">
+
+        <article class="log-card corrupted">
             <div class="log-header"><span>LOG_ID: SUBJECT_ZERO_RAW</span><span>NODO_OCULTO</span></div>
             <h3>[!] Archivo Corrupto: Sujeto Zero</h3>
             <p class="log-body">Se ha detectado una fuga de datos masiva en las capas más profundas del sistema. Los fragmentos apuntan a una entidad designada como 'Sujeto Zero'. Los registros locales no pueden procesar la línea de tiempo...</p>
             <button class="btn-terminal" onclick="openModal('modal-sujeto-zero')">> Desencriptar Registro</button>
         </article>
+
     </main>
 
     <section class="puzzle-section">
@@ -221,8 +223,8 @@
                 <img id="visor-sujeto-img" src="sujeto1.jpg" alt="Registro Visual Sujeto" style="width: 100%; max-height: 250px; object-fit: cover; border: 1px solid var(--color-alert); margin-top: 15px; margin-bottom: 10px; filter: grayscale(1) contrast(1.2) sepia(1) hue-rotate(300deg);">
                 
                 <div id="visor-sujeto-reporte" style="font-size: 0.85rem; color: #ffb3cc; min-height: 50px; text-align: left; border-top: 1px dashed var(--color-alert); padding-top: 8px;">
-                    <strong>SUJETO:</strong> #01_AN0NYMOUS <br>
-                    <strong>ESTADO:</strong> Rutina alterada. Se repite infinitamente en el sector residencial.
+                    <strong>SUJETO:</strong> #01_USER_ERR <br>
+                    <strong>ESTADO:</strong> Desconexión temporal. Olvidó su función original en el sistema. Vagabundea por nodos caídos.
                 </div>
             </div>
 
@@ -321,7 +323,19 @@
     </div>
 
     <div id="modal-e" class="modal-overlay">
-       <div id="modal-sujeto-zero" class="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-title">> TERMINAL DE ENLACE GLOBAL</div>
+            <div class="modal-desc">
+                <p>Abriendo pasarela de communication directa con las frecuencias del espectro social público controlado por los creadores de la IP.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-close" onclick="closeModal('modal-e')">[Cerrar]</button>
+                <a href="https://www.instagram.com/outofthebounds404?igsh=MTd2cHozYWRjbzNhaQ==" target="_blank" class="btn-action-link">Establecer conexión con el exterior</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-sujeto-zero" class="modal-overlay">
         <div class="modal-window alert-style">
             <div class="modal-title">> EXTRACCIÓN EXITOSA // REGISTRO: SUJETO_ZERO</div>
             <div class="modal-desc">
@@ -393,7 +407,7 @@
             }
         }
 
-        // DATOS DE LOS SUJETOS DE LA SERIE ANIMADA
+        // DATOS DE LOS SUJETOS DE LA SERIE ANIMADA (¡AHORA 3 PERSONAJES!)
         const listaSujetos = [
             {
                 img: "sujeto1.jpg",
@@ -402,6 +416,10 @@
             {
                 img: "sujeto2.jpg",
                 reporte: "<strong>SUJETO:</strong> #02_GLITCH_MIND <br><strong>ESTADO:</strong> Altamente errático. Sus hilos de voz se reproducen al revés. Intentó hackear la terminal central."
+            },
+            {
+                img: "sujeto3.jpg",
+                reporte: "<strong>SUJETO:</strong> #03_CORE_OVERLOAD <br><strong>ESTADO:</strong> En cuarentena estricta. Absorbe radiación de datos del núcleo. Su firma digital se desvanece de a intervalos."
             }
         ];
 
