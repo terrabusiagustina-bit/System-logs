@@ -146,7 +146,12 @@
                 <source src="soundreality-morse-140985.mp3" type="audio/mpeg">
             </audio>
         </article>
-
+<article class="log-card corrupted">
+            <div class="log-header"><span>LOG_ID: SUBJECT_ZERO_RAW</span><span>NODO_OCULTO</span></div>
+            <h3>[!] Archivo Corrupto: Sujeto Zero</h3>
+            <p class="log-body">Se ha detectado una fuga de datos masiva en las capas más profundas del sistema. Los fragmentos apuntan a una entidad designada como 'Sujeto Zero'. Los registros locales no pueden procesar la línea de tiempo...</p>
+            <button class="btn-terminal" onclick="openModal('modal-sujeto-zero')">> Desencriptar Registro</button>
+        </article>
     </main>
 
     <section class="puzzle-section">
@@ -316,14 +321,19 @@
     </div>
 
     <div id="modal-e" class="modal-overlay">
-        <div class="modal-window">
-            <div class="modal-title">> TERMINAL DE ENLACE GLOBAL</div>
+       <div id="modal-sujeto-zero" class="modal-overlay">
+        <div class="modal-window alert-style">
+            <div class="modal-title">> EXTRACCIÓN EXITOSA // REGISTRO: SUJETO_ZERO</div>
             <div class="modal-desc">
-                <p>Abriendo pasarela de comunicación directa con las frecuencias del espectro social público controlado por los creadores de la IP.</p>
+                <p style="color: #ff0055; font-weight: bold;">[ALERTA DE SEGURIDAD]: HISTORIA INTERACTIVA ENCONTRADA.</p>
+                <p>El cortafuegos no pudo contener la secuencia de memorias de la entidad Zero. El flujo de datos ha sido desviado de forma segura hacia un entorno de presentación externa.</p>
+                <p>Al ingresar, tomarás el control del flujo temporal. Cada decisión alterará el estado del código remanente. Proceder bajo su propio riesgo.</p>
             </div>
             <div class="modal-actions">
-                <button class="btn-close" onclick="closeModal('modal-e')">[Cerrar]</button>
-                <a href="https://www.instagram.com/outofthebounds404?igsh=MTd2cHozYWRjbzNhaQ==" target="_blank" class="btn-action-link">Establecer conexión con el exterior</a>
+                <button class="btn-close" onclick="closeModal('modal-sujeto-zero')">[Abortar Conexión]</button>
+                <a href="https://docs.google.com/presentation/d/1uf6xzxwiQb0m78iNDzfX8qfa7rnKZxfBs0zoH6d0EHc/edit?usp=sharing" target="_blank" class="btn-action-link">
+                    >> ENTRAR A LA HISTORIA INTERACTIVA <<
+                </a>
             </div>
         </div>
     </div>
